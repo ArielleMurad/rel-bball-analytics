@@ -1,2 +1,2 @@
-FLASK_APP=app.py
+FLASK_APP=rel_bball_analytics
 FLASK_DEBUG=true
