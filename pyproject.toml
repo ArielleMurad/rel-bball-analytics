@@ -2,7 +2,7 @@
 name = "rel-bball-analytics"
 version = "0.1.0"
 description = ""
-authors = ["Your Name <you@example.com>"]
+authors = ["Arielle Murad <ariellem99@gmail.com>"]
 readme = "README.md"
 packages = [{include = "rel_bball_analytics"}]
 
@@ -12,7 +12,12 @@ flask = "^2.2.2"
 requests = "^2.28.2"
 notebook = "^6.5.2"
 python-dotenv = "^0.21.1"
+pandas = "^1.5.3"
 
+[tool.poetry.dev-dependencies]
+black = "*"
+isort = "*"
+pre-commit = "*"
 
 [build-system]
 requires = ["poetry-core"]
