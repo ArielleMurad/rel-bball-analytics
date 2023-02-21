@@ -28,7 +28,8 @@ def get_player_matches(name: str):
 
     players = pd.DataFrame(player_data["response"])
     players = filter_nba_players(players=players)
-    return clean_player_data(players=players)
+
+    return clean_player_data(players=players) if not players.empty else None
 
 
 def filter_nba_players(players: pd.DataFrame):
