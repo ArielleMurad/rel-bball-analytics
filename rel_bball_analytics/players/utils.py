@@ -15,7 +15,7 @@ def get_data_from_api(endpoint: str, params: dict):
 
 
 def time_to_int(time):
-    if time is None or type(time) == int:
+    if time is None:
         return time
 
     if ":" in time:

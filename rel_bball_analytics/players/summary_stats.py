@@ -22,7 +22,6 @@ STATS_COLUMNS = {
     "blocks": "blocks",
     "turnovers": "turnovers",
     "pFouls": "personal_fouls",
-    "plusMinus": "plus_minus",
 }
 
 EXCLUDED_STATS_COLUMNS = [
@@ -30,6 +29,7 @@ EXCLUDED_STATS_COLUMNS = [
     "team",
     "game",
     "comment",
+    "plusMinus",
 ]
 
 
@@ -46,7 +46,7 @@ def get_summary_stats(player_ids: list, season=CURRENT_SEASON):
         stats = pd.DataFrame(stats_data["response"])
         stats = clean_stats_data(stats=stats)
 
-        if not stats:
+        if stats is None:
             continue
 
         player_summary_stats = get_player_summary_stats(
@@ -69,6 +69,9 @@ def clean_stats_data(stats: pd.DataFrame):
     stats["team_code"] = stats["team"].apply(lambda obj: obj["code"])
     stats["game_id"] = stats["game"].apply(lambda obj: obj["id"])
     stats["min"] = stats["min"].apply(time_to_int)
+
+    for col in ["fgp", "ftp", "tpp"]:
+        stats[col] = stats[col].astype(float)
 
     return stats.drop(EXCLUDED_STATS_COLUMNS, axis=1)
 

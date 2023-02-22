@@ -6,7 +6,8 @@ from rel_bball_analytics.players.player_info import (clean_player_data,
                                                      filter_nba_players,
                                                      get_player_matches)
 
-from .fixtures.api_responses import players_empty, players_nba, players_non_nba
+from .fixtures.api_responses import (empty_response, players_nba,
+                                     players_non_nba)
 from .fixtures.dataframes import expected_player_matches
 
 
@@ -22,8 +23,8 @@ class TestGetPlayerMatches:
         assert len(results) > 0
 
     @patch("rel_bball_analytics.players.player_info.get_data_from_api")
-    def test_returns_none_if_no_matches(self, get_data_from_api, players_empty):
-        get_data_from_api.return_value = players_empty
+    def test_returns_none_if_no_matches(self, get_data_from_api, empty_response):
+        get_data_from_api.return_value = empty_response
         results = get_player_matches(name="fake")
 
         assert results is None
