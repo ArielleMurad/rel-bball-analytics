@@ -12,3 +12,15 @@ def get_data_from_api(endpoint: str, params: dict):
 
     response = requests.get(url, params=params, headers=headers)
     return response.json()
+
+
+def time_to_int(time):
+    if time is None or type(time) == int:
+        return time
+
+    if ":" in time:
+        mins, secs = time.split(":")
+        result = int(mins) + int(secs) / 60
+        return round(result, 2)
+
+    return round(int(time), 2)
