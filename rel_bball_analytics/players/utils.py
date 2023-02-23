@@ -15,12 +15,14 @@ def get_data_from_api(endpoint: str, params: dict):
 
 
 def time_to_int(time):
+    """Convert time strings from api response to int"""
     if time is None:
         return time
 
     if ":" in time:
         mins, secs = time.split(":")
         result = int(mins) + int(secs) / 60
-        return round(result, 2)
+    else:
+        result = int(time)
 
-    return round(int(time), 2)
+    return round(result, 2)

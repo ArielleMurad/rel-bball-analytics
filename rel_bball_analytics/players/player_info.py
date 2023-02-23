@@ -39,7 +39,7 @@ def filter_nba_players(players: pd.DataFrame):
 
 
 def clean_player_data(players: pd.DataFrame):
-    """Flatten nested JSON object into valid row in dataframe"""
+    """Flatten nested JSON objects into valid rows in dataframe"""
     players["birth_date"] = players["birth"].apply(lambda obj: obj.get("date"))
     players["country"] = players["birth"].apply(lambda obj: obj.get("country"))
     players["start_year"] = players["nba"].apply(lambda obj: obj.get("start"))

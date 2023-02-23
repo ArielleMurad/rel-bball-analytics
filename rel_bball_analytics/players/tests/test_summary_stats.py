@@ -3,11 +3,16 @@ from unittest.mock import patch
 import pandas as pd
 
 from rel_bball_analytics.players.summary_stats import (
-    clean_stats_data, get_player_summary_stats, get_summary_stats)
+    clean_stats_data,
+    get_player_summary_stats,
+    get_summary_stats,
+)
 
 from .fixtures.api_responses import empty_response, stats_full, stats_missing
-from .fixtures.dataframes import (expected_clean_stats_data,
-                                  expected_player_summary_stats)
+from .fixtures.dataframes import (
+    expected_clean_stats_data,
+    expected_player_summary_stats,
+)
 
 
 class TestGetSummaryStats:
@@ -45,7 +50,6 @@ class TestCleanStatsData:
         stats = pd.DataFrame(stats_full["response"])
         results = clean_stats_data(stats=stats)
 
-        print(results.to_dict("records"))
         assert results.equals(expected_clean_stats_data)
 
     def test_returns_none_if_missing_data(self, stats_missing):
@@ -61,7 +65,8 @@ class TestGetPlayerSummaryStats:
     def test_returns_summary_stats(
         self, expected_clean_stats_data, expected_player_summary_stats
     ):
-        stats = expected_clean_stats_data
-        results = get_player_summary_stats(id=124, season=2022, stats=stats)
+        results = get_player_summary_stats(
+            id=124, season=2022, stats=expected_clean_stats_data
+        )
 
         assert results == expected_player_summary_stats

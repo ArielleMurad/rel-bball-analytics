@@ -2,12 +2,17 @@ from unittest.mock import patch
 
 import pandas as pd
 
-from rel_bball_analytics.players.player_info import (clean_player_data,
-                                                     filter_nba_players,
-                                                     get_player_matches)
+from rel_bball_analytics.players.player_info import (
+    clean_player_data,
+    filter_nba_players,
+    get_player_matches,
+)
 
-from .fixtures.api_responses import (empty_response, players_nba,
-                                     players_non_nba)
+from .fixtures.api_responses import (
+    empty_response,
+    players_nba,
+    players_non_nba,
+)
 from .fixtures.dataframes import expected_player_matches
 
 
