@@ -1,6 +1,6 @@
 import pandas as pd
 
-from .utils import CURRENT_SEASON, get_data_from_api, time_to_int
+from .utils import get_data_from_api, time_to_int
 
 STATS_COLUMNS = {
     "points": "points",
@@ -33,7 +33,7 @@ EXCLUDED_STATS_COLUMNS = [
 ]
 
 
-def get_summary_stats(player_ids: list, season=CURRENT_SEASON):
+def get_summary_stats(player_ids: list, season: int):
     """Return dataframe with summary stats for each player"""
     summary_stats = []
     for id in player_ids:
@@ -64,7 +64,6 @@ def clean_stats_data(stats: pd.DataFrame):
     if stats.empty:
         return
 
-    stats["player_id"] = stats["player"].apply(lambda obj: obj["id"])
     stats["team_id"] = stats["team"].apply(lambda obj: obj["id"])
     stats["team_code"] = stats["team"].apply(lambda obj: obj["code"])
     stats["game_id"] = stats["game"].apply(lambda obj: obj["id"])

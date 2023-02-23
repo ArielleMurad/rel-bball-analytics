@@ -21,7 +21,7 @@ class TestGetSummaryStats:
     @patch("rel_bball_analytics.players.summary_stats.get_data_from_api")
     def test_returns_summary_stats(self, get_data_from_api, stats_full):
         get_data_from_api.return_value = stats_full
-        results = get_summary_stats(player_ids=[124])
+        results = get_summary_stats(player_ids=[124], season=2022)
 
         assert type(results) == pd.DataFrame
         assert len(results) > 0
@@ -29,7 +29,7 @@ class TestGetSummaryStats:
     @patch("rel_bball_analytics.players.summary_stats.get_data_from_api")
     def test_returns_empty_df_if_no_stats(self, get_data_from_api, empty_response):
         get_data_from_api.return_value = empty_response
-        results = get_summary_stats(player_ids=[000])
+        results = get_summary_stats(player_ids=[000], season=2022)
 
         assert type(results) == pd.DataFrame
         assert results.empty
@@ -37,7 +37,7 @@ class TestGetSummaryStats:
     @patch("rel_bball_analytics.players.summary_stats.get_data_from_api")
     def test_returns_empty_df_if_missing_stats(self, get_data_from_api, stats_missing):
         get_data_from_api.return_value = stats_missing
-        results = get_summary_stats(player_ids=[121])
+        results = get_summary_stats(player_ids=[121], season=2022)
 
         assert type(results) == pd.DataFrame
         assert results.empty
