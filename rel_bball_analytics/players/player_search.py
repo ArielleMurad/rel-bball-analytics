@@ -12,17 +12,17 @@ def player_search(name: str, season=CURRENT_SEASON):
     players = get_player_matches(name=name)
 
     if players is None:
-        app.logger.info(f"No matches found for '{name}'")
+        app.logger.info(f"No matches found for '{name}' in the {season} season")
         return
 
-    player_ids = players["id"].unique().tolist()
+    player_ids = players["id"].unique()
     summary_stats = get_summary_stats(player_ids=player_ids, season=season)
 
     if summary_stats.empty:
-        app.logger.info(f"No statistics available for '{name}'")
+        app.logger.info(f"No statistics available for '{name}' in the {season} season")
         return
 
     results = players.merge(summary_stats, how="inner", on="id")
-    app.logger.info(f"{len(results)} results found for '{name}'")
+    app.logger.info(f"{len(results)} results found for '{name}' in the {season} season")
 
     return results
