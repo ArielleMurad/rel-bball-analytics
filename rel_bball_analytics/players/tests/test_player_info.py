@@ -30,7 +30,7 @@ class TestGetPlayerMatches:
     @patch("rel_bball_analytics.players.player_info.get_data_from_api")
     def test_returns_none_if_no_matches(self, get_data_from_api, empty_response):
         get_data_from_api.return_value = empty_response
-        results = get_player_matches(name="fake")
+        results = get_player_matches(name="Fake")
 
         assert results is None
 
