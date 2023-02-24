@@ -59,7 +59,7 @@ def get_summary_stats(player_ids: list, season: int):
 
 def clean_stats_data(stats: pd.DataFrame):
     """Flatten nested JSON object into valid row in dataframe and drop null values"""
-    stats = stats.dropna(subset=["points", "min"])
+    stats.dropna(subset=["points", "min"], inplace=True)
 
     if stats.empty:
         return
