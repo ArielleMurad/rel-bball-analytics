@@ -80,12 +80,16 @@ def get_player_summary_stats(id: int, season: int, stats: pd.DataFrame):
     stats_data = stats[STATS_COLUMNS.keys()].rename(columns=STATS_COLUMNS)
     summary_stats = stats_data.mean(axis=0, numeric_only=True)
 
+    team_id = stats["team_id"].mode()
+    team = stats["team_code"].mode()
+    position = stats["pos"].mode()
+
     return {
         "id": id,
         "season": season,
-        "team_id": stats["team_id"].mode()[0],
-        "team": stats["team_code"].mode()[0],
-        "position": stats["pos"].mode()[0],
+        "team_id": team_id[0] if not team_id.empty else None,
+        "team": team[0] if not team.empty else None,
+        "position": position[0] if not position.empty else None,
         "games_played": len(stats),
         **summary_stats,
     }
