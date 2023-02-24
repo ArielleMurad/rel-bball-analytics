@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>NBA Player Search</h1>
+
+<form method="post">
+    <div class="form-group">
+        <label for="name">Last Name</label>
+        <input type="text" name="name" placeholder="ex: Curry" class="form-control" required></input>
+    </div>
+
+    <div class="form-group">
+        <label for="season">Season</label>
+        <input type="text" name="season" placeholder="ex: 2022" class="form-control" required></input>
+    </div>
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary">Search</button>
+    </div>
+</form>
+
+<div class="container">
+    {% block players %} {% endblock %}
+</div>
+{% endblock %}
