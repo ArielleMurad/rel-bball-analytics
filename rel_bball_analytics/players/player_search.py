@@ -1,6 +1,7 @@
 import pandas as pd
 
 from rel_bball_analytics import app
+from rel_bball_analytics.static.styles.players import players_table
 
 from .player_info import get_player_matches
 from .summary_stats import get_summary_stats
@@ -11,7 +12,6 @@ TABLE_COLUMNS = {
     "lastname": "Last Name",
     "team": "Team",
     "position": "Position",
-    "is_active": "Is Active?",
     "games_played": "GP",
     "points": "PPG",
     "field_goal_percentage": "FG%",
@@ -19,6 +19,7 @@ TABLE_COLUMNS = {
     "free_throw_percentage": "FT%",
     "total_rebounds": "TRB",
     "assists": "AST",
+    "is_active": "Is Active?",
 }
 
 
@@ -43,6 +44,16 @@ def player_search(name: str, season=CURRENT_SEASON):
     return results
 
 
-def format_table_columns(table: pd.DataFrame):
-    """Format players table columns to be displayed on search page"""
-    return table[TABLE_COLUMNS.keys()].rename(columns=TABLE_COLUMNS)
+def format_search_result(search_result: pd.DataFrame):
+    """Returns HTML with formatted players table to be displayed on search page"""
+    search_result = search_result.sort_values(by=["points"], ascending=False)
+    search_result = search_result[TABLE_COLUMNS.keys()].rename(columns=TABLE_COLUMNS)
+
+    table_styles = players_table()
+
+    return (
+        search_result.style.format(precision=1, na_rep="")
+        .set_table_styles(table_styles)
+        .hide(axis=0)
+        .to_html(index=False)
+    )
