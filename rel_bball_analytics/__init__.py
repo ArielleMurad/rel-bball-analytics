@@ -4,7 +4,7 @@ from dotenv import load_dotenv
 from flask import Flask, render_template
 from flask_sqlalchemy import SQLAlchemy
 
-from .settings import configure_db
+from .settings import configure_db, configure_views
 
 load_dotenv()
 
@@ -15,9 +15,11 @@ app.config.from_pyfile("settings.py")
 app.logger.setLevel(logging.INFO)
 
 db = SQLAlchemy(app)
-configure_db(db=db)
+
+configure_db(db)
+configure_views(app)
 
 
 @app.route("/")
-def index():
-    return render_template("index.html")
+def home():
+    return render_template("home.html")

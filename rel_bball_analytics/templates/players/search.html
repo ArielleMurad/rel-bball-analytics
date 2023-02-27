@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1 class="mt-4 mb-2">NBA Player Search</h1>
+
+<form class="form-inline" method="post">
+    <div class="form-group">
+        <input type="text" name="name" placeholder="Last Name" class="form-control mr-4" required></input>
+        <select name="season" id="season" class="form-control mr-4">
+            <option value="2022" selected>2022</option>
+            <option value="2021">2021</option>
+            <option value="2020">2020</option>
+            <option value="2019">2019</option>
+            <option value="2018">2018</option>
+            <option value="2017">2017</option>
+            <option value="2016">2016</option>
+            <option value="2015">2015</option>
+          </select>
+        <button type="submit" class="btn btn-primary">Search</button>
+    </div>
+</form>
+
+<div class="container mt-4">
+    {% block players %} {% endblock %}
+</div>
+{% endblock %}
