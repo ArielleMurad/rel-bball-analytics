@@ -10,6 +10,7 @@ from .utils import CURRENT_SEASON
 TABLE_COLUMNS = {
     "firstname": "First Name",
     "lastname": "Last Name",
+    "age": "Age",
     "team": "Team",
     "position": "Position",
     "games_played": "GP",
@@ -46,6 +47,10 @@ def player_search(name: str, season=CURRENT_SEASON):
 
 def format_search_result(search_result: pd.DataFrame):
     """Returns HTML with formatted players table to be displayed on search page"""
+    search_result["is_active"] = search_result["is_active"].apply(
+        lambda val: "Yes" if val is True else "No"
+    )
+
     search_result = search_result.sort_values(by=["points"], ascending=False)
     search_result = search_result[TABLE_COLUMNS.keys()].rename(columns=TABLE_COLUMNS)
 

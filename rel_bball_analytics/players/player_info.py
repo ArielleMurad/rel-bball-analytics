@@ -1,12 +1,13 @@
 import pandas as pd
 
-from .utils import get_data_from_api
+from .utils import calculate_age, get_data_from_api
 
 PLAYER_COLUMNS = [
     "id",
     "firstname",
     "lastname",
     "birth_date",
+    "age",
     "country",
     "height_feet",
     "height_inches",
@@ -41,12 +42,16 @@ def filter_nba_players(players: pd.DataFrame):
 def clean_player_data(players: pd.DataFrame):
     """Flatten nested JSON objects into valid rows in dataframe"""
     players["birth_date"] = players["birth"].apply(lambda obj: obj.get("date"))
+    players["age"] = players["birth_date"].apply(calculate_age)
     players["country"] = players["birth"].apply(lambda obj: obj.get("country"))
+
     players["start_year"] = players["nba"].apply(lambda obj: obj.get("start"))
     players["pro_years"] = players["nba"].apply(lambda obj: obj.get("pro"))
+
     players["height_feet"] = players["height"].apply(lambda obj: obj.get("feets"))
     players["height_inches"] = players["height"].apply(lambda obj: obj.get("inches"))
     players["weight_pounds"] = players["weight"].apply(lambda obj: obj.get("pounds"))
+
     players["jersey"] = players["leagues"].apply(
         lambda obj: obj["standard"].get("jersey")
     )
