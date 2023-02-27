@@ -1,5 +1,6 @@
 from os import environ
 
+from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 
 SQLALCHEMY_DATABASE_URI = environ.get("SQLALCHEMY_DATABASE_URI")
@@ -12,3 +13,9 @@ def configure_db(db: SQLAlchemy):
     from .players.models import Player
 
     db.create_all()
+
+
+def configure_views(app: Flask):
+    from .players.views import players_bp
+
+    app.register_blueprint(players_bp)

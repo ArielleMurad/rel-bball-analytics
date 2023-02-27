@@ -1,7 +1,7 @@
 import pandas as pd
 
+import rel_bball_analytics.static.styles.players as styles
 from rel_bball_analytics import app
-from rel_bball_analytics.static.styles.players import players_table
 
 from .player_info import get_player_matches
 from .summary_stats import get_summary_stats
@@ -54,11 +54,9 @@ def format_search_result(search_result: pd.DataFrame):
     search_result = search_result.sort_values(by=["points"], ascending=False)
     search_result = search_result[TABLE_COLUMNS.keys()].rename(columns=TABLE_COLUMNS)
 
-    table_styles = players_table()
-
     return (
         search_result.style.format(precision=1, na_rep="")
-        .set_table_styles(table_styles)
+        .set_table_styles(styles.players_table())
         .hide(axis=0)
         .to_html(index=False)
     )
