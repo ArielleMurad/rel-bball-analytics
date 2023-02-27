@@ -1,25 +1,28 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
-    <title>Basketball Analytics</title>
+        <title class="title">Basketball Analytics</title>
 
-    <link rel="icon" href="static/icons/basketball.svg">
-  </head>
-  <body>
-    <nav class="navbar navbar-expand-md navbar-light bg-light">
-        <a class="navbar-brand" href="{{ url_for('home')}}">Home</a>
-        <a class="navbar-brand" href="{{ url_for('players.search')}}">Players</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-    </nav>
-    <div class="container">
-        {% block content %} {% endblock %}
-    </div>
-  </body>
+        <link rel="icon" href="static/icons/basketball.svg">
+    </head>
+    <body>
+        <nav class="navbar navbar-expand-md sticky-top navbar-dark" style="background-color: #dc6300;">
+            <a class="navbar-brand ml-2 mr-4" data-toggle="tab" href="{{ url_for('home')}}">Home</a>
+            <a class="navbar-brand ml-2 mr-4" data-toggle="tab" href="{{ url_for('players.search')}}">Players</a>
+        </nav>
+        <div class="container">
+            {% block content %} {% endblock %}
+        </div>
+    </body>
 </html>
+
+<style>
+    .navbar .navbar-brand:hover {
+        font-weight: bold;
+    }
+</style>
