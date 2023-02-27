@@ -58,5 +58,5 @@ def format_search_result(search_result: pd.DataFrame):
         search_result.style.format(precision=1, na_rep="")
         .set_table_styles(styles.players_table())
         .hide(axis=0)
-        .to_html(index=False)
+        .to_html()
     )

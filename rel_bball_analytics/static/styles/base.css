@@ -1,0 +1,24 @@
+/* Text */
+.message {
+    font-size: 18px;
+    font-family: Helvetica;
+}
+
+/* Button Styles */
+.btn-primary {
+    background-color: #ff943d;
+    border: none;
+}
+
+.btn-primary:hover {
+    background-color: #dc6300;
+}
+
+/* Navbar Styles */
+.navbar {
+    background-color: #dc6300;
+}
+
+.navbar .navbar-brand:hover {
+    font-weight: bold;
+}

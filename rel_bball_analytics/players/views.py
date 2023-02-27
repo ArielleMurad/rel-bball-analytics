@@ -14,7 +14,7 @@ def search():
         search_result = player_search(name=name, season=season)
 
         if search_result is None:
-            message = "<p>Sorry, no data available for this search!</p>"
+            message = '<p class="message">Sorry, no data available for this search!</p>'
             return render_template("players/search_result.html", search_result=message)
 
         return render_template(

@@ -32,7 +32,7 @@ def time_to_int(time: str):
 
 
 def calculate_age(birth_date: str):
-    """Calculate age from birth date string"""
+    """Calculate age from birth date string given in the api response"""
     if birth_date is None:
         return None
 
