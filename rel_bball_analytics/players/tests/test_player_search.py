@@ -25,7 +25,7 @@ class TestPlayerSearch:
         get_player_matches.return_value = expected_player_matches
         get_summary_stats.return_value = pd.DataFrame([expected_player_summary_stats])
 
-        results = player_search(name="Curry")
+        results = player_search(name="Curry", season=2022)
 
         assert type(results) == pd.DataFrame
         assert len(results) > 0
@@ -37,7 +37,7 @@ class TestPlayerSearch:
     ):
         get_player_matches.return_value = None
 
-        results = player_search(name="Fake")
+        results = player_search(name="Fake", season=2022)
         assert results is None
 
     @patch("rel_bball_analytics.players.player_search.get_summary_stats")
@@ -48,5 +48,6 @@ class TestPlayerSearch:
         get_player_matches.return_value = expected_player_matches
         get_summary_stats.return_value = pd.DataFrame()
 
-        results = player_search(name="Wembanyama")
+        results = player_search(name="Wembanyama", season=2022)
         assert results is None
+

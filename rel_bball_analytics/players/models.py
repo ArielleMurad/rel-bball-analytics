@@ -28,6 +28,7 @@ class Player(db.Model):
     college = Column(String(64))
     team_id = Column(Integer())
     team = Column(String(16))
+    position = Column(String(16))
 
     games_played = Column(Integer())
     points = Column(Float())
@@ -49,3 +50,10 @@ class Player(db.Model):
     blocks = Column(Float())
     turnovers = Column(Float())
     personal_fouls = Column(Float())
+
+
+def save_players_data(players: list):
+    """Add player records to db"""
+    records = [Player(**player) for player in players]
+    db.session.add_all(records)
+    db.session.commit()

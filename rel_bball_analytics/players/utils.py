@@ -5,8 +5,6 @@ from dateutil import relativedelta
 
 from rel_bball_analytics import app
 
-CURRENT_SEASON = 2022
-
 
 def get_data_from_api(endpoint: str, params: dict):
     """Return JSON response from GET request to nba.api-sports.io"""

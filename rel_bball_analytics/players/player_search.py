@@ -5,7 +5,6 @@ from rel_bball_analytics import app
 
 from .player_info import get_player_matches
 from .summary_stats import get_summary_stats
-from .utils import CURRENT_SEASON
 
 TABLE_COLUMNS = {
     "firstname": "First Name",
@@ -24,7 +23,7 @@ TABLE_COLUMNS = {
 }
 
 
-def player_search(name: str, season=CURRENT_SEASON):
+def player_search(name: str, season: int):
     """Return info and summary stats for each player matching given search"""
     players = get_player_matches(name=name)
 
