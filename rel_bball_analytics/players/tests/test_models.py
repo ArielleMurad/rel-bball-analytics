@@ -6,7 +6,6 @@ from rel_bball_analytics.players.models import (
     fetch_player_records,
     save_player_records,
 )
-from rel_bball_analytics.setup import create_app
 
 from .fixtures.db_records import (
     player_record,
@@ -14,24 +13,7 @@ from .fixtures.db_records import (
     players_missing_required_field,
     players_valid,
 )
-
-
-@pytest.fixture(scope="module", autouse=True)
-def setup_test_db():
-    create_app(config="rel_bball_analytics.config.TestingConfig")
-
-    yield
-
-    db.session.rollback()
-    db.session.close()
-
-
-@pytest.fixture()
-def reset_test_db():
-    yield
-
-    db.session.query(Player).delete()
-    db.session.commit()
+from .fixtures.test_db import reset_test_db, setup_test_db
 
 
 class TestSavePlayerRecords:
