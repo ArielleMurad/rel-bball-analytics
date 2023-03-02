@@ -56,7 +56,7 @@ class Player(db.Model):
 
 
 def save_player_records(players: list):
-    """Add player records to db, return false if exception is raised"""
+    """Add player records to db, log error if one is raised"""
     records = [Player(**player) for player in players]
 
     try:

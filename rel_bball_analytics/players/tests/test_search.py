@@ -45,6 +45,7 @@ class TestGetSearchResult:
         search_result = get_search_result(name="Curry", season="2022")
 
         assert search_result is None
+        assert fetch_from_api.called
 
 
 class TestFetchFromApi:
