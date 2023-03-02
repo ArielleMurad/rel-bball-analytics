@@ -8,4 +8,5 @@ Poetry is used to manage package dependencies. You can learn more about poetry [
 1. Activate the virtual environment: `poetry shell` 
 2. Install package dependencies: `poetry install`
 3. Configure environment variables: `cp .env.example .env`
-4. Run the flask application: `poetry run flask run`
+4. Run database migrations: `flask db upgrade`
+5. Run the flask application: `poetry run flask run`

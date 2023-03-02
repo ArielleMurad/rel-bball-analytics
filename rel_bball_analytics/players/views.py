@@ -5,13 +5,13 @@ players_bp = Blueprint("players", __name__, url_prefix="/players")
 
 @players_bp.route("", methods=("GET", "POST"))
 def search():
-    from .player_search import format_search_result, player_search
+    from .search import format_search_result, get_search_result
 
     if request.method == "POST":
         name = request.form["name"]
         season = request.form["season"]
 
-        search_result = player_search(name=name, season=season)
+        search_result = get_search_result(name=name, season=season)
 
         if search_result is None:
             message = '<p class="message">Sorry, no data available for this search!</p>'

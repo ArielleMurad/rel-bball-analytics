@@ -1,8 +1,11 @@
+import logging
 from datetime import datetime
 
 from sqlalchemy import Boolean, Column, DateTime, Float, Integer, String
 
-from rel_bball_analytics import db
+from rel_bball_analytics.database import db
+
+logger = logging.getLogger(__name__)
 
 
 class Player(db.Model):
@@ -28,6 +31,7 @@ class Player(db.Model):
     college = Column(String(64))
     team_id = Column(Integer())
     team = Column(String(16))
+    position = Column(String(16))
 
     games_played = Column(Integer())
     points = Column(Float())
@@ -49,3 +53,23 @@ class Player(db.Model):
     blocks = Column(Float())
     turnovers = Column(Float())
     personal_fouls = Column(Float())
+
+
+def save_player_records(players: list):
+    """Add player records to db, log error if one is raised"""
+    records = [Player(**player) for player in players]
+
+    try:
+        db.session.add_all(records)
+        db.session.commit()
+    except Exception as e:
+        db.session.rollback()
+
+        failed_ids = [player["id"] for player in players]
+        logger.error(f"Failed to save records with ids: {failed_ids}")
+
+
+def fetch_player_records(**kwargs):
+    """Query players table and return matching records"""
+    records = db.session.query(Player).filter_by(**kwargs).all()
+    return [record.__dict__ for record in records]
