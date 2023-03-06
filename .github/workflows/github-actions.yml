@@ -37,7 +37,7 @@ jobs:
     - name: Configure Environment
       run: |
         cp .env.example .env
-        flask db upgrade
+        poetry run flask db upgrade
 
     - name: Code Quality
       run: poetry run black . --check
