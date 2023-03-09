@@ -3,9 +3,10 @@ from flask import Blueprint, render_template, request
 players_bp = Blueprint("players", __name__, url_prefix="/players")
 
 
-@players_bp.route("", methods=("GET", "POST"))
+@players_bp.route("", methods=["GET", "POST"])
 def search():
-    from .search import format_search_result, get_search_result
+    from .search import get_search_result
+    from .table import format_search_result
 
     if request.method == "POST":
         name = request.form["name"]
@@ -23,3 +24,12 @@ def search():
         )
 
     return render_template("players/search.html")
+
+
+@players_bp.route("/<id>", methods=["GET"])
+def details(id):
+    from .models import fetch_player_records
+
+    player_data = fetch_player_records(id=id)[0]
+
+    return render_template("players/details.html", player_data=player_data)
