@@ -55,6 +55,7 @@ def fetch_from_api(name: str, season: int):
     results = players.merge(summary_stats, how="inner", on="id")
     logger.info(f"{len(results)} results found for '{name}' in the {season} season")
 
+    results["id"] = results.apply(lambda row: f"{row['id']}_{row['season']}", axis=1)
     save_player_records(players=results.to_dict(orient="records"))
     return results
 

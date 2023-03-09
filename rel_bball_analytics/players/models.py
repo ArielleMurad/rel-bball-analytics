@@ -11,7 +11,7 @@ logger = logging.getLogger(__name__)
 class Player(db.Model):
     __tablename__ = "players"
 
-    id = Column(Integer(), primary_key=True)
+    id = Column(String(16), primary_key=True)
     firstname = Column(String(32), nullable=False)
     lastname = Column(String(32), nullable=False)
     season = Column(Integer(), nullable=False)
