@@ -7,7 +7,7 @@ from rel_bball_analytics.players.models import Player
 def players_valid():
     return [
         {
-            "id": 124,
+            "id": "124_2022",
             "firstname": "Stephen",
             "lastname": "Curry",
             "season": 2022,
@@ -16,7 +16,7 @@ def players_valid():
             "position": "PG",
         },
         {
-            "id": 265,
+            "id": "265_2019",
             "firstname": "LeBron",
             "lastname": "James",
             "season": 2019,
@@ -31,7 +31,7 @@ def players_valid():
 def players_missing_required_field():
     return [
         {
-            "id": 124,
+            "id": "124_",
             "firstname": "Stephen",
             "team_id": 11,
             "team": "GSW",
@@ -44,7 +44,7 @@ def players_missing_required_field():
 def players_duplicate():
     return [
         {
-            "id": 124,
+            "id": "124_2022",
             "firstname": "Stephen",
             "lastname": "Curry",
             "season": 2022,
@@ -53,7 +53,7 @@ def players_duplicate():
             "position": "PG",
         },
         {
-            "id": 124,
+            "id": "124_2022",
             "firstname": "Stephen",
             "lastname": "Curry",
             "season": 2022,
@@ -67,7 +67,7 @@ def players_duplicate():
 @pytest.fixture()
 def player_record():
     return Player(
-        id=124,
+        id="124_2022",
         firstname="Stephen",
         lastname="Curry",
         season=2022,

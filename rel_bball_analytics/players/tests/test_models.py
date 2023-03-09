@@ -46,7 +46,7 @@ class TestFetchPlayerRecords:
         records = fetch_player_records(lastname="Curry", season=2022)
 
         assert len(records) > 0
-        assert records[0]["id"] == 124
+        assert records[0]["id"] == "124_2022"
         assert records[0]["firstname"] == "Stephen"
         assert records[0]["lastname"] == "Curry"
         assert records[0]["season"] == 2022

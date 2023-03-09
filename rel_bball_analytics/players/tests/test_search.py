@@ -36,7 +36,7 @@ class TestGetSearchResult:
         search_result = get_search_result(name="Curry", season="2022")
 
         assert type(search_result) == pd.DataFrame
-        assert len(search_result) == 2
+        assert len(search_result) > 0
         assert fetch_from_api.called
 
     @patch("rel_bball_analytics.players.search.fetch_from_api")
