@@ -6,7 +6,7 @@ players_bp = Blueprint("players", __name__, url_prefix="/players")
 @players_bp.route("", methods=["GET", "POST"])
 def search():
     from .search import get_search_result
-    from .table import format_search_result
+    from .styles import format_search_result
 
     if request.method == "POST":
         name = request.form["name"]
@@ -29,7 +29,9 @@ def search():
 @players_bp.route("/<id>", methods=["GET"])
 def details(id):
     from .models import fetch_player_records
+    from .styles import round_stats
 
     player_data = fetch_player_records(id=id)[0]
+    player_data = round_stats(stats=player_data)
 
     return render_template("players/details.html", player_data=player_data)

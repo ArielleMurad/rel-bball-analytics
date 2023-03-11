@@ -1,0 +1,21 @@
+.column-40 {
+    float: left;
+    width: 40%;
+}
+
+.column-60 {
+    float: left;
+    width: 60%;
+}
+
+.season-stats th {
+    padding: 0.5rem 1rem;
+    text-align: center;
+    
+}
+
+.season-stats td {
+    padding: 0.5rem 1rem;
+    text-align: center;
+    border-top: 2px solid black;
+}

@@ -42,3 +42,11 @@ def format_search_result(search_result: pd.DataFrame):
 def add_link(id):
     """Adds link to player details page"""
     return f'<a href="{url_for("players.details", id=id)}">See Details</a>'
+
+
+def round_stats(stats: dict, precision=1):
+    """Rounds statsitics to amount of decimal places specified by precision"""
+    return {
+        key: round(val, precision) if type(val) is float else val
+        for key, val in stats.items()
+    }

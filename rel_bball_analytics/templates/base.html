@@ -7,9 +7,10 @@
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
         <link rel="stylesheet" href="{{ url_for('static', filename='styles/base.css') }}">
 
-        <title class="title">Basketball Analytics</title>
+        {% block styles %} {% endblock %}
 
-        <link rel="icon" href="static/icons/basketball.svg">
+        <title class="title">Basketball Analytics</title>
+        <link rel="icon" href="{{ url_for('static', filename='icons/basketball.svg') }}">
     </head>
     <body>
         <nav class="navbar navbar-expand-md sticky-top navbar-dark">
