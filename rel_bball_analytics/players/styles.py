@@ -1,7 +1,7 @@
 import pandas as pd
 from flask import url_for
 
-import rel_bball_analytics.static.styles.players as styles
+import rel_bball_analytics.static.py.players as styles
 
 TABLE_COLUMNS = {
     "firstname": "First Name",
