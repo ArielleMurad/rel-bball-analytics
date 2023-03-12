@@ -1,11 +1,11 @@
-.column-40 {
+.column-20 {
     float: left;
-    width: 40%;
+    width: 20%;
 }
 
-.column-60 {
+.column-30 {
     float: left;
-    width: 60%;
+    width: 30%;
 }
 
 .season-stats th {

@@ -44,9 +44,13 @@ def add_link(id):
     return f'<a href="{url_for("players.details", id=id)}">See Details</a>'
 
 
-def round_stats(stats: dict, precision=1):
-    """Rounds statsitics to amount of decimal places specified by precision"""
-    return {
-        key: round(val, precision) if type(val) is float else val
-        for key, val in stats.items()
-    }
+def format_player_details(player_data: dict):
+    """Round floats to 1 decimal place and change None values to N/A"""
+    for key, val in player_data.items():
+        if type(val) is float:
+            player_data[key] = round(val, 1)
+
+        if val is None:
+            player_data[key] = ""
+
+    return player_data

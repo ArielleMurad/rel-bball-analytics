@@ -1,23 +1,28 @@
 {% extends 'base.html' %}
 
-{% block styles %}
+{% block css %}
 <link rel="stylesheet" href="{{ url_for('static', filename='css/player-details.css') }}">
 {% endblock %}
 
 {% block content %}
 <h1 class="mt-4">{{ player_data.firstname }} {{ player_data.lastname }}</h1>
 <div class="container mt-2">
-    <div class="column-40 mb-4">
-        <p class="mb-2"><b>Birthdate: </b>{{ player_data.birth_date }} ({{ player_data.age }} years old)</p>
+    <div class="column-30 mb-4">
+        <p class="mb-2"><b>Birthdate: </b>{{ player_data.birth_date }}</p>
         <p class="mb-2"><b>Country: </b>{{ player_data.country }}</p>
-        <p class="mb-2"><b>Height: </b>{{ player_data.height_feet }}'{{ player_data.height_inches }}"</p>
-        <p class="mb-2"><b>Weight: </b>{{ player_data.weight_pounds }}lb</p>
         <p class="mb-2"><b>College: </b>{{ player_data.college }}</p>
     </div>
-    <div class="column-60 mb-4">
+    <div class="column-20 mb-4">
+        <p class="mb-2"><b>Age: </b>{{ player_data.age }}</p>
+        <p class="mb-2"><b>Height: </b>{{ player_data.height_feet }}'{{ player_data.height_inches }}"</p>
+        <p class="mb-2"><b>Weight: </b>{{ player_data.weight_pounds }}lb</p>
+    </div>
+    <div class="column-20 mb-4">
         <p class="mb-2"><b>Team: </b>{{ player_data.team }}</p>
         <p class="mb-2"><b>Position: </b>{{ player_data.position }}</p>
         <p class="mb-2"><b>Jersey: </b>{{ player_data.jersey }}</p>
+    </div>
+    <div class="column-30 mb-4">
         <p class="mb-2"><b>Start Year: </b>{{ player_data.start_year }}</p>
         <p class="mb-2"><b>NBA Experience: </b>{{ player_data.pro_years }} years</p>
         <p class="mb-2"><b>Active player? </b>{% if player_data.is_active %}Yes{% else %}No{% endif %}</p>

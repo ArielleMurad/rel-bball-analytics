@@ -29,9 +29,9 @@ def search():
 @players_bp.route("/<id>", methods=["GET"])
 def details(id):
     from .models import fetch_player_records
-    from .styles import round_stats
+    from .styles import format_player_details
 
     player_data = fetch_player_records(id=id)[0]
-    player_data = round_stats(stats=player_data)
+    player_data = format_player_details(player_data=player_data)
 
     return render_template("players/details.html", player_data=player_data)
