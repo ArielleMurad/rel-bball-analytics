@@ -10,3 +10,7 @@ Poetry is used to manage package dependencies. You can learn more about poetry [
 3. Configure environment variables: `cp .env.example .env`
 4. Run database migrations: `flask db upgrade`
 5. Run the flask application: `poetry run flask run`
+
+## Demo
+https://user-images.githubusercontent.com/43834783/224589818-6aaf68c5-6b43-4cec-8882-d0e83a064802.mov
+
