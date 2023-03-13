@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+
+{% block css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/player-details.css') }}">
+{% endblock %}
+
+{% block content %}
+<h1 class="mt-4">{{ player_data.firstname }} {{ player_data.lastname }}</h1>
+<div class="container mt-2">
+    <div class="column-30 mb-4">
+        <p class="mb-2"><b>Birthdate: </b>{{ player_data.birth_date }}</p>
+        <p class="mb-2"><b>Country: </b>{{ player_data.country }}</p>
+        <p class="mb-2"><b>College: </b>{{ player_data.college }}</p>
+    </div>
+    <div class="column-20 mb-4">
+        <p class="mb-2"><b>Age: </b>{{ player_data.age }}</p>
+        <p class="mb-2"><b>Height: </b>{{ player_data.height_feet }}'{{ player_data.height_inches }}"</p>
+        <p class="mb-2"><b>Weight: </b>{{ player_data.weight_pounds }}lb</p>
+    </div>
+    <div class="column-20 mb-4">
+        <p class="mb-2"><b>Team: </b>{{ player_data.team }}</p>
+        <p class="mb-2"><b>Position: </b>{{ player_data.position }}</p>
+        <p class="mb-2"><b>Jersey: </b>{{ player_data.jersey }}</p>
+    </div>
+    <div class="column-30 mb-4">
+        <p class="mb-2"><b>Start Year: </b>{{ player_data.start_year }}</p>
+        <p class="mb-2"><b>NBA Experience: </b>{{ player_data.pro_years }} years</p>
+        <p class="mb-2"><b>Active player? </b>{% if player_data.is_active %}Yes{% else %}No{% endif %}</p>
+    </div>
+</div>
+
+<h2 class="mt-4">{{ player_data.season }} Per-Game Statistics</h2>
+<div class="container mt-2">
+    <table class="season-stats">
+        <tr>
+          <th>G</th>
+          <th>MP</th>
+          <th>FG</th>
+          <th>FGA</th>
+          <th>FG%</th>
+          <th>3P</th>
+          <th>3PA</th>
+          <th>3P%</th>
+          <th>FT</th>
+          <th>FTA</th>
+          <th>FT%</th>
+          <th>ORB</th>
+          <th>DRB</th>
+          <th>TRB</th>
+          <th>AST</th>
+          <th>STL</th>
+          <th>BLK</th>
+          <th>TOV</th>
+          <th>PF</th>
+          <th>PTS</th>
+        </tr>
+        <tr>
+          <td>{{ player_data.games_played }}</td>
+          <td>{{ player_data.minutes_played }}</td>
+          <td>{{ player_data.field_goals_made }}</td>
+          <td>{{ player_data.field_goal_attempts }}</td>
+          <td>{{ player_data.field_goal_percentage }}</td>
+          <td>{{ player_data.three_points_made }}</td>
+          <td>{{ player_data.three_point_attempts }}</td>
+          <td>{{ player_data.three_point_percentage }}</td>
+          <td>{{ player_data.free_throws_made }}</td>
+          <td>{{ player_data.free_throw_attempts }}</td>
+          <td>{{ player_data.free_throw_percentage }}</td>
+          <td>{{ player_data.offensive_rebounds }}</td>
+          <td>{{ player_data.defensive_rebounds }}</td>
+          <td>{{ player_data.total_rebounds }}</td>
+          <td>{{ player_data.assists }}</td>
+          <td>{{ player_data.steals }}</td>
+          <td>{{ player_data.blocks }}</td>
+          <td>{{ player_data.turnovers }}</td>
+          <td>{{ player_data.personal_fouls }}</td>
+          <td>{{ player_data.points }}</td>
+        </tr>
+    </table>
+</div>
+{% endblock %}
