@@ -13,7 +13,7 @@ from .fixtures.dataframes import (
     expected_player_summary_stats,
 )
 from .fixtures.db_records import player_record, players_valid
-from .fixtures.test_db import reset_test_db, setup_test_db
+from .fixtures.database import reset_test_db, setup_test_db
 
 
 class TestGetSearchResult:
