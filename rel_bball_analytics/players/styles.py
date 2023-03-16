@@ -45,9 +45,8 @@ def add_link(id):
 
 
 def format_player_details(player_data: dict):
-    """Format values according design specifications"""
-    season = player_data["season"]
-    player_data["season"] = f"{season}-{season + 1}"
+    """Format values according to design specifications"""
+    player_data["season"] = format_season(player_data["season"])
 
     for key, val in player_data.items():
         if type(val) is float:
@@ -57,3 +56,8 @@ def format_player_details(player_data: dict):
             player_data[key] = ""
 
     return player_data
+
+
+def format_season(season: int):
+    """Display both years of the season"""
+    return f"{season}-{season + 1}"
