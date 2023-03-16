@@ -13,14 +13,20 @@ def search():
         season = request.form["season"]
 
         search_result = get_search_result(name=name, season=season)
+        season_label = f"{season}-{int(season) + 1}"
 
         if search_result is None:
             message = '<p class="message">Sorry, no data available for this search!</p>'
-            return render_template("players/search_result.html", search_result=message)
+            return render_template(
+                "players/search_result.html",
+                search_result=message,
+                season_label=season_label,
+            )
 
         return render_template(
             "players/search_result.html",
             search_result=format_search_result(search_result=search_result),
+            season_label=season_label,
         )
 
     return render_template("players/search.html")

@@ -1,7 +1,7 @@
 {% extends 'players/search.html' %}
 
 {% block players %}
-    <h3 class="mt-4 mb-4">Results for "{{ request.form["name"]}}" in the {{ request.form["season"]}} season:</h3>
+    <h3 class="mt-4 mb-4">Results for "{{ request.form["name"] }}" ({{ season_label }})</h3>
 
     {{ search_result|safe }}
 {% endblock %}
