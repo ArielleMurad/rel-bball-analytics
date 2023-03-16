@@ -11,7 +11,7 @@ def expected_player_matches():
                 "firstname": "Stephen",
                 "lastname": "Curry",
                 "birth_date": "1988-03-14",
-                "age": 34,
+                "age": 35,
                 "country": "USA",
                 "height_feet": "6",
                 "height_inches": "2",

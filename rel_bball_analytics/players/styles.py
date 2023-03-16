@@ -45,7 +45,9 @@ def add_link(id):
 
 
 def format_player_details(player_data: dict):
-    """Round floats to 1 decimal place and change None values to N/A"""
+    """Format values according to design specifications"""
+    player_data["season"] = format_season(player_data["season"])
+
     for key, val in player_data.items():
         if type(val) is float:
             player_data[key] = round(val, 1)
@@ -54,3 +56,8 @@ def format_player_details(player_data: dict):
             player_data[key] = ""
 
     return player_data
+
+
+def format_season(season: int):
+    """Display both years of the season"""
+    return f"{season}-{season + 1}"
