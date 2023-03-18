@@ -1,10 +1,16 @@
 import pandas as pd
 
 from rel_bball_analytics.api import get_data_from_api
+from rel_bball_analytics.database import delete_records, save_records
 
+from .models import Statistic
 from .utils import time_to_int
 
 STATS_COLUMNS = {
+    "game_id": "game_id",
+    "team_id": "team_id",
+    "team_code": "team",
+    "pos": "position",
     "points": "points",
     "min": "minutes_played",
     "fgm": "field_goals_made",
@@ -26,37 +32,35 @@ STATS_COLUMNS = {
     "pFouls": "personal_fouls",
 }
 
-EXCLUDED_STATS_COLUMNS = [
-    "player",
-    "team",
-    "game",
-    "comment",
-    "plusMinus",
-]
+
+def get_player_stats(player_id: int, season: int):
+    """Return dataframe with given player's stats for each game in season"""
+    stats = fetch_stats_data(player_id=player_id, season=season)
+
+    if stats is None:
+        return
+
+    stats["id"] = stats["game_id"].apply(lambda game_id: f"{player_id}_{game_id}")
+    stats["player_id"] = player_id
+    stats["season"] = season
+
+    # Update existing records if any
+    delete_records(model=Statistic, player_id=player_id, season=season)
+    save_records(model=Statistic, items=stats.to_dict(orient="records"))
+
+    return stats
 
 
-def get_summary_stats(player_ids: list, season: int):
-    """Return dataframe with summary stats for each player"""
-    summary_stats = []
-    for id in player_ids:
-        params = {"id": id, "season": season}
-        stats_data = get_data_from_api(endpoint="players/statistics", params=params)
+def fetch_stats_data(player_id: int, season: int):
+    """Fetch results from API and return standardized stats data"""
+    params = {"id": player_id, "season": season}
+    stats_data = get_data_from_api(endpoint="players/statistics", params=params)
 
-        if stats_data["results"] == 0:
-            continue
+    if stats_data["results"] == 0:
+        return
 
-        stats = pd.DataFrame(stats_data["response"])
-        stats = clean_stats_data(stats=stats)
-
-        if stats is None:
-            continue
-
-        player_summary_stats = get_player_summary_stats(
-            id=id, season=season, stats=stats
-        )
-        summary_stats.append(player_summary_stats)
-
-    return pd.DataFrame(summary_stats)
+    stats = pd.DataFrame(stats_data["response"])
+    return clean_stats_data(stats=stats)
 
 
 def clean_stats_data(stats: pd.DataFrame):
@@ -74,24 +78,4 @@ def clean_stats_data(stats: pd.DataFrame):
     for col in ["fgp", "ftp", "tpp"]:
         stats[col] = stats[col].astype(float)
 
-    return stats.drop(EXCLUDED_STATS_COLUMNS, axis=1)
-
-
-def get_player_summary_stats(id: int, season: int, stats: pd.DataFrame):
-    """Return obj with summary stats for given id and season"""
-    stats_data = stats[STATS_COLUMNS.keys()].rename(columns=STATS_COLUMNS)
-    summary_stats = stats_data.mean(axis=0, numeric_only=True)
-
-    team_id = stats["team_id"].mode()
-    team = stats["team_code"].mode()
-    position = stats["pos"].mode()
-
-    return {
-        "id": id,
-        "season": season,
-        "team_id": team_id[0] if not team_id.empty else None,
-        "team": team[0] if not team.empty else None,
-        "position": position[0] if not position.empty else None,
-        "games_played": len(stats),
-        **summary_stats,
-    }
+    return stats[STATS_COLUMNS.keys()].rename(columns=STATS_COLUMNS)

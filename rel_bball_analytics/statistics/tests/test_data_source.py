@@ -4,43 +4,64 @@ import pandas as pd
 
 from rel_bball_analytics.statistics.data_source import (
     clean_stats_data,
-    get_player_summary_stats,
-    get_summary_stats,
+    fetch_stats_data,
+    get_player_stats,
 )
 
 from .fixtures.api_responses import empty_response, stats_full, stats_missing
-from .fixtures.dataframes import (
-    expected_clean_stats_data,
-    expected_player_summary_stats,
-)
+from .fixtures.database import reset_test_db, setup_test_db
+from .fixtures.dataframes import expected_clean_stats_data
 
 
-class TestGetSummaryStats:
-    """test suite for get_summary_stats"""
+class TestGetPlayerStats:
+    """test suite for get_player_stats"""
 
-    @patch("rel_bball_analytics.players.summary_stats.get_data_from_api")
-    def test_returns_summary_stats(self, get_data_from_api, stats_full):
+    @patch("rel_bball_analytics.statistics.data_source.fetch_stats_data")
+    def test_returns_data_from_api(
+        self, fetch_stats_data, reset_test_db, expected_clean_stats_data
+    ):
+        fetch_stats_data.return_value = expected_clean_stats_data
+        result = get_player_stats(player_id=124, season=2022)
+
+        assert type(result) == pd.DataFrame
+        assert len(result) > 0
+
+        assert result.iloc[0]["id"] == "124_1"
+        assert result.iloc[0]["player_id"] == 124
+        assert result.iloc[0]["season"] == 2022
+
+    @patch("rel_bball_analytics.statistics.data_source.fetch_stats_data")
+    def test_returns_none_if_no_matches_found(self, fetch_stats_data):
+        fetch_stats_data.return_value = None
+        result = get_player_stats(player_id=000, season=2022)
+
+        assert result is None
+
+
+class TestFetchStatsData:
+    """test suite for fetch_stats_data"""
+
+    @patch("rel_bball_analytics.statistics.data_source.get_data_from_api")
+    def test_returns_dataframe_for_valid_matches(self, get_data_from_api, stats_full):
         get_data_from_api.return_value = stats_full
-        results = get_summary_stats(player_ids=[124], season=2022)
+        results = fetch_stats_data(player_id=124, season=2022)
 
         assert type(results) == pd.DataFrame
         assert len(results) > 0
 
-    @patch("rel_bball_analytics.players.summary_stats.get_data_from_api")
-    def test_returns_empty_df_if_no_stats(self, get_data_from_api, empty_response):
+    @patch("rel_bball_analytics.statistics.data_source.get_data_from_api")
+    def test_returns_none_if_no_matches(self, get_data_from_api, empty_response):
         get_data_from_api.return_value = empty_response
-        results = get_summary_stats(player_ids=[000], season=2022)
+        results = fetch_stats_data(player_id=000, season=2022)
 
-        assert type(results) == pd.DataFrame
-        assert results.empty
+        assert results is None
 
-    @patch("rel_bball_analytics.players.summary_stats.get_data_from_api")
+    @patch("rel_bball_analytics.statistics.data_source.get_data_from_api")
     def test_returns_empty_df_if_missing_stats(self, get_data_from_api, stats_missing):
         get_data_from_api.return_value = stats_missing
-        results = get_summary_stats(player_ids=[121], season=2022)
+        results = fetch_stats_data(player_id=121, season=2022)
 
-        assert type(results) == pd.DataFrame
-        assert results.empty
+        assert results is None
 
 
 class TestCleanStatsData:
@@ -57,16 +78,3 @@ class TestCleanStatsData:
         results = clean_stats_data(stats=stats)
 
         assert results is None
-
-
-class TestGetPlayerSummaryStats:
-    """test suite for get_player_summary_stats"""
-
-    def test_returns_summary_stats(
-        self, expected_clean_stats_data, expected_player_summary_stats
-    ):
-        results = get_player_summary_stats(
-            id=124, season=2022, stats=expected_clean_stats_data
-        )
-
-        assert results == expected_player_summary_stats
