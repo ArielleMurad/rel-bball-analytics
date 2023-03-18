@@ -8,12 +8,8 @@ from rel_bball_analytics.statistics.data_source import (
     get_summary_stats,
 )
 
-from ...players.tests.fixtures.api_responses import (
-    empty_response,
-    stats_full,
-    stats_missing,
-)
-from ...players.tests.fixtures.dataframes import (
+from .fixtures.api_responses import empty_response, stats_full, stats_missing
+from .fixtures.dataframes import (
     expected_clean_stats_data,
     expected_player_summary_stats,
 )

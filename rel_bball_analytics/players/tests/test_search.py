@@ -7,13 +7,13 @@ from rel_bball_analytics.players.search import (
     fetch_from_api,
     get_search_result,
 )
-
-from .fixtures.dataframes import (
-    expected_player_matches,
+from rel_bball_analytics.statistics.tests.fixtures.dataframes import (
     expected_player_summary_stats,
 )
-from .fixtures.db_records import player_record, players_valid
+
 from .fixtures.database import reset_test_db, setup_test_db
+from .fixtures.dataframes import expected_player_matches
+from .fixtures.db_records import player_record, players_valid
 
 
 class TestGetSearchResult:
