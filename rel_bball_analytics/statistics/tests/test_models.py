@@ -1,4 +1,4 @@
-from rel_bball_analytics.database import db, fetch_records, save_records
+from rel_bball_analytics.database import db, delete_records, fetch_records, save_records
 from rel_bball_analytics.statistics.models import Statistic
 
 from .fixtures.db_records import (
@@ -51,3 +51,21 @@ class TestFetchStatisticRecords:
         records = fetch_records(model=Statistic, player_id=265, season=2019)
 
         assert len(records) == 0
+
+
+class TestDeleteStatisticRecords:
+    """test suite for delete_records"""
+
+    def test_deletes_all_records_matching_query(self, reset_test_db, stats_record):
+        db.session.add(stats_record)
+        delete_records(model=Statistic, player_id=124, season=2022)
+
+        records = db.session.query(Statistic).all()
+        assert len(records) == 0
+
+    def test_deletes_none_if_no_records_match_query(self, reset_test_db, stats_record):
+        db.session.add(stats_record)
+        delete_records(model=Statistic, player_id=265, season=2019)
+
+        records = db.session.query(Statistic).all()
+        assert len(records) > 0
