@@ -1,6 +1,8 @@
 import pandas as pd
 
-from .utils import get_data_from_api, time_to_int
+from rel_bball_analytics.api import get_data_from_api
+
+from .utils import time_to_int
 
 STATS_COLUMNS = {
     "points": "points",

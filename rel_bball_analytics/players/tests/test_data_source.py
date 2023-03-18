@@ -2,7 +2,7 @@ from unittest.mock import patch
 
 import pandas as pd
 
-from rel_bball_analytics.players.player_info import (
+from rel_bball_analytics.players.data_source import (
     clean_player_data,
     filter_nba_players,
     get_player_matches,

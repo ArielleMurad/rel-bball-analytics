@@ -2,9 +2,10 @@ import logging
 
 import pandas as pd
 
+from rel_bball_analytics.statistics.data_source import get_summary_stats
+
+from .data_source import get_player_matches
 from .models import fetch_player_records, save_player_records
-from .player_info import get_player_matches
-from .summary_stats import get_summary_stats
 
 logger = logging.getLogger(__name__)
 

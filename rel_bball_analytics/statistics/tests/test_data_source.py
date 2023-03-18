@@ -2,14 +2,18 @@ from unittest.mock import patch
 
 import pandas as pd
 
-from rel_bball_analytics.players.summary_stats import (
+from rel_bball_analytics.statistics.data_source import (
     clean_stats_data,
     get_player_summary_stats,
     get_summary_stats,
 )
 
-from .fixtures.api_responses import empty_response, stats_full, stats_missing
-from .fixtures.dataframes import (
+from ...players.tests.fixtures.api_responses import (
+    empty_response,
+    stats_full,
+    stats_missing,
+)
+from ...players.tests.fixtures.dataframes import (
     expected_clean_stats_data,
     expected_player_summary_stats,
 )

@@ -1,6 +1,8 @@
 import pandas as pd
 
-from .utils import calculate_age, get_data_from_api
+from rel_bball_analytics.api import get_data_from_api
+
+from .utils import calculate_age
 
 PLAYER_COLUMNS = [
     "id",
