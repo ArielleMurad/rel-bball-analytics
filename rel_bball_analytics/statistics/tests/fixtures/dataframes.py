@@ -61,13 +61,21 @@ def expected_clean_stats_data():
 
 
 @pytest.fixture()
+def expected_player_stats(expected_clean_stats_data):
+    player_stats = expected_clean_stats_data
+    player_stats["player_id"] = 124
+    player_stats["season"] = 2022
+
+    return player_stats
+
+
+@pytest.fixture()
 def expected_player_summary_stats():
     return {
         "id": 124,
         "season": 2022,
-        "team_id": 11,
-        "team": "GSW",
-        "position": "PG",
+        "team": ["GSW"],
+        "position": ["PG"],
         "games_played": 2,
         "points": 25,
         "minutes_played": 27.25,
