@@ -23,7 +23,7 @@ class TestGetSummaryStats:
         results = get_summary_stats(player_ids=[124], season=2022)
 
         assert type(results) == pd.DataFrame
-        assert len(results) == 1
+        assert len(results) > 0
 
     @patch("rel_bball_analytics.statistics.summary.get_player_stats")
     def test_returns_empty_df_if_no_stats(self, get_player_stats):

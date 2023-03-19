@@ -26,7 +26,9 @@ def get_summary_stats(player_ids: list, season: int):
 
 def get_player_summary_stats(stats: pd.DataFrame):
     """Return obj with summary stats for given id and season"""
-    summary_stats = stats.drop(EXCLUDED_COLUMNS, axis=1).mean(axis=0, numeric_only=True)
+    summary_stats = (
+        stats.drop(EXCLUDED_COLUMNS, axis=1).mean(axis=0, numeric_only=True).to_dict()
+    )
 
     return {
         "id": stats["player_id"].iloc[0],

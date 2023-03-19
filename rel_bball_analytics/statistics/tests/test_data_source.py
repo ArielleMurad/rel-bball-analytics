@@ -17,7 +17,7 @@ class TestGetPlayerStats:
     """test suite for get_player_stats"""
 
     @patch("rel_bball_analytics.statistics.data_source.fetch_stats_data")
-    def test_returns_data_from_api(
+    def test_returns_dataframe_with_stats_data(
         self, fetch_stats_data, reset_test_db, expected_clean_stats_data
     ):
         fetch_stats_data.return_value = expected_clean_stats_data

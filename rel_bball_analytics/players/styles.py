@@ -1,4 +1,3 @@
-import numpy as np
 import pandas as pd
 from flask import url_for
 
@@ -51,7 +50,7 @@ def format_player_details(player_data: dict):
     player_data["position"] = format_list(player_data["position"])
 
     for key, val in player_data.items():
-        if isinstance(val, np.floating):
+        if isinstance(val, float):
             player_data[key] = round(val, 1)
 
         if val is None:
