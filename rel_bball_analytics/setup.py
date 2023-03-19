@@ -26,6 +26,7 @@ def create_app(config: str):
 
 def configure_db():
     from .players.models import Player
+    from .statistics.models import Statistic
 
     db.create_all()
 
