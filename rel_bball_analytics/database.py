@@ -29,5 +29,5 @@ def fetch_records(model: db.Model, **kwargs):
 
 def delete_records(model: db.Model, **kwargs):
     """Delete all records in model matching query"""
-    db.session.query(model).filter_by(**kwargs).delete()
+    db.session.query(model).filter_by(**kwargs).delete(synchronize_session=False)
     db.session.commit()

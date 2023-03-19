@@ -31,8 +31,8 @@ def get_player_summary_stats(stats: pd.DataFrame):
     return {
         "id": stats["player_id"].iloc[0],
         "season": stats["season"].iloc[0],
-        "team": stats["team"].unique(),
-        "position": stats["position"].unique(),
+        "team": stats["team"].dropna().unique(),
+        "position": stats["position"].dropna().unique(),
         "games_played": len(stats),
         **summary_stats,
     }
