@@ -1,6 +1,6 @@
 from datetime import datetime
 
-from sqlalchemy import Column, DateTime, Float, ForeignKey, Integer, String
+from sqlalchemy import Column, DateTime, Float, Integer, String
 
 from rel_bball_analytics.database import db
 
@@ -9,15 +9,15 @@ class Statistic(db.Model):
     __tablename__ = "statistics"
 
     id = Column(String(16), primary_key=True)
-    player_id = Column(Integer(), ForeignKey("players.id"), nullable=False)
+    player_id = Column(Integer(), nullable=False)
     game_id = Column(Integer(), nullable=False)
     created_at = Column(DateTime(), default=datetime.now)
     updated_at = Column(DateTime(), default=datetime.now, onupdate=datetime.now)
 
     season = Column(Integer(), nullable=False)
     team_id = Column(Integer(), nullable=False)
-    team = Column(String(16))
-    position = Column(String(16))
+    team = Column(String(8))
+    position = Column(String(8))
 
     points = Column(Float())
     minutes_played = Column(Float())
