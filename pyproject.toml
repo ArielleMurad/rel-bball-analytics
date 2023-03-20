@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "rel-bball-analytics"
-version = "1.0.2"
+version = "1.2.0"
 description = ""
 authors = ["Arielle Murad <ariellem99@gmail.com>"]
 readme = "README.md"

@@ -1,3 +1,6 @@
+TEXT_PRIMARY = "black"
+TEXT_SECONDARY = "#dc6300"
+
 BG_PRIMARY = "#ff943d"
 BG_LIGHT = "hsl(30deg 100% 62% / 44%)"
 
@@ -39,6 +42,20 @@ def players_table():
             "selector": "tbody tr:hover",
             "props": [
                 ("background-color", BG_LIGHT),
+            ],
+        },
+        {
+            "selector": "a",
+            "props": [
+                ("color", TEXT_PRIMARY),
+                ("font-style", "italic"),
+            ],
+        },
+        {
+            "selector": "a:hover",
+            "props": [
+                ("color", TEXT_SECONDARY),
+                ("text-decoration", "none"),
             ],
         },
     ]
