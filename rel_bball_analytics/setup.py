@@ -2,9 +2,8 @@ import logging
 
 from dotenv import load_dotenv
 from flask import Flask
-from flask_migrate import Migrate
 
-from .database import db
+from .database import db, migrate
 
 
 def create_app(config: str):
@@ -15,7 +14,7 @@ def create_app(config: str):
     app.app_context().push()
 
     db.init_app(app)
-    migrate = Migrate(app, db)
+    migrate.init_app(app, db)
 
     configure_db()
     configure_views(app)
@@ -26,6 +25,7 @@ def create_app(config: str):
 
 def configure_db():
     from .players.models import Player
+    from .statistics.models import Statistic
 
     db.create_all()
 

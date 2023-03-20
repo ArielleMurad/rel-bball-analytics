@@ -1,6 +1,10 @@
 import pandas as pd
 
-from .utils import calculate_age, get_data_from_api
+from rel_bball_analytics.api import get_data_from_api
+from rel_bball_analytics.database import fetch_records, save_records
+
+from .models import Player
+from .utils import calculate_age
 
 PLAYER_COLUMNS = [
     "id",
@@ -22,6 +26,23 @@ PLAYER_COLUMNS = [
 
 def get_player_matches(name: str):
     """Return dataframe with general info on players that match the given search"""
+    records = fetch_records(model=Player, lastname=name)
+
+    if len(records) > 0:
+        return pd.DataFrame(records)
+
+    players = fetch_player_data(name=name)
+
+    if players is None:
+        return
+
+    save_records(model=Player, items=players.to_dict(orient="records"))
+
+    return players
+
+
+def fetch_player_data(name: str):
+    """Fetch results from API and return standardized player data"""
     player_data = get_data_from_api(endpoint="players", params={"name": name})
 
     if player_data["results"] == 0:

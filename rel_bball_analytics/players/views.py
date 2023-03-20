@@ -1,3 +1,4 @@
+import pandas as pd
 from flask import Blueprint, render_template, request
 
 players_bp = Blueprint("players", __name__, url_prefix="/players")
@@ -31,12 +32,21 @@ def search():
     return render_template("players/search.html")
 
 
-@players_bp.route("/<id>", methods=["GET"])
-def details(id):
-    from .models import fetch_player_records
+@players_bp.route("/<id>_<season>", methods=["GET"])
+def details(id, season):
+    from rel_bball_analytics.database import fetch_records
+    from rel_bball_analytics.statistics.models import Statistic
+    from rel_bball_analytics.statistics.summary import get_player_summary_stats
+
+    from .models import Player
     from .styles import format_player_details
 
-    player_data = fetch_player_records(id=id)[0]
+    player_data = fetch_records(model=Player, id=id)[0]
+
+    stats_data = fetch_records(model=Statistic, player_id=id, season=season)
+    stats_data = get_player_summary_stats(stats=pd.DataFrame(stats_data))
+
+    player_data = {**player_data, **stats_data}
     player_data = format_player_details(player_data=player_data)
 
     return render_template("players/details.html", player_data=player_data)
