@@ -24,6 +24,7 @@ def create_app(config: str):
 
 
 def configure_db():
+    from .games.models import Game
     from .players.models import Player
     from .statistics.models import Statistic
 
