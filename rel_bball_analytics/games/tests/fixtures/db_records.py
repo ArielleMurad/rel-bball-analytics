@@ -75,15 +75,28 @@ def games_duplicate():
 
 
 @pytest.fixture()
-def game_record():
-    return Game(
-        id="124_10101",
-        season=2022,
-        date=datetime.now(),
-        home="GSW",
-        away="WAS",
-        home_score=104,
-        away_score=95,
-        winner="GSW",
-        difference=9,
-    )
+def game_records():
+    return [
+        Game(
+            id=1,
+            season=2022,
+            date=datetime.now(),
+            home="GSW",
+            away="WAS",
+            home_score=104,
+            away_score=95,
+            winner="GSW",
+            difference=9,
+        ),
+        Game(
+            id=2,
+            season=2022,
+            date=datetime.now(),
+            home="DEN",
+            away="GSW",
+            home_score=119,
+            away_score=112,
+            winner="DEN",
+            difference=7,
+        ),
+    ]
