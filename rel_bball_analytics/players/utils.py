@@ -2,6 +2,23 @@ from datetime import datetime
 
 from dateutil import relativedelta
 
+PLAYER_COLUMNS = [
+    "id",
+    "firstname",
+    "lastname",
+    "birth_date",
+    "age",
+    "country",
+    "height_feet",
+    "height_inches",
+    "weight_pounds",
+    "jersey",
+    "is_active",
+    "start_year",
+    "pro_years",
+    "college",
+]
+
 
 def calculate_age(birth_date: str):
     """Calculate age from birth date string given in the api response"""

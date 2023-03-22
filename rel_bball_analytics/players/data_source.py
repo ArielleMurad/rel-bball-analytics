@@ -4,24 +4,7 @@ from rel_bball_analytics.api import get_data_from_api
 from rel_bball_analytics.database import fetch_records, save_records
 
 from .models import Player
-from .utils import calculate_age
-
-PLAYER_COLUMNS = [
-    "id",
-    "firstname",
-    "lastname",
-    "birth_date",
-    "age",
-    "country",
-    "height_feet",
-    "height_inches",
-    "weight_pounds",
-    "jersey",
-    "is_active",
-    "start_year",
-    "pro_years",
-    "college",
-]
+from .utils import PLAYER_COLUMNS, calculate_age
 
 
 def get_player_matches(name: str):
