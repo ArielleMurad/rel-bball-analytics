@@ -33,7 +33,7 @@ def fetch_game_data(team_id: int, season: int):
     games = pd.DataFrame(game_data["response"])
     games = filter_finished_games(games=games)
 
-    return clean_game_data(games=games)
+    return clean_game_data(games=games) if not games.empty else None
 
 
 def filter_finished_games(games: pd.DataFrame):
