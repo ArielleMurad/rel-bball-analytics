@@ -16,16 +16,15 @@ def search():
         search_result = get_search_result(name=name, season=season)
 
         if search_result is None:
-            message = '<p class="message">Sorry, no data available for this search!</p>'
-            return render_template(
-                "players/search_result.html",
-                search_result=message,
-                season=format_season(season),
+            search_result = (
+                '<p class="message">Sorry, no data available for this search!</p>'
             )
+        else:
+            search_result = format_search_result(search_result=search_result)
 
         return render_template(
             "players/search_result.html",
-            search_result=format_search_result(search_result=search_result),
+            search_result=search_result,
             season=format_season(season),
         )
 
@@ -42,7 +41,13 @@ def details(id, season):
     player_data = get_player_details(id=id, season=season)
     game_log = get_game_log(player_id=id, season=season)
 
+    if game_log is None:
+        game_log = (
+            '<p class="message">Sorry, no game data available for this season!</p>'
+        )
+
     return render_template(
         "players/details.html",
         player_data=format_player_details(player_data=player_data),
+        game_log=game_log,
     )

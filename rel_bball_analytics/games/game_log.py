@@ -24,4 +24,8 @@ def get_game_log(player_id: int, season: int):
 
         game_stats = game_stats.append(team_game_stats)
 
-    return player_stats.merge(game_stats, left_on="game_id", right_on="id")
+    return (
+        player_stats.merge(game_stats, left_on="game_id", right_on="id")
+        if not game_stats.empty
+        else None
+    )

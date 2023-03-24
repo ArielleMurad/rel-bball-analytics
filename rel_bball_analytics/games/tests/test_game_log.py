@@ -1,5 +1,7 @@
 from unittest.mock import patch
 
+import pandas as pd
+
 from rel_bball_analytics.database import db
 from rel_bball_analytics.games.game_log import get_game_log
 from rel_bball_analytics.statistics.tests.fixtures.db_records import stats_record
@@ -24,3 +26,13 @@ class TestGetGameLog:
         assert results.iloc[0]["points"] == 25
         assert results.iloc[0]["winner"] == "GSW"
         assert results.iloc[0]["difference"] == 9
+
+    @patch("rel_bball_analytics.games.game_log.get_game_stats")
+    def test_returns_none_if_no_game_data(
+        self, get_game_stats, reset_test_db, stats_record
+    ):
+        db.session.add(stats_record)
+        get_game_stats.return_value = pd.DataFrame()
+        results = get_game_log(player_id=124, season=2022)
+
+        assert results is None
