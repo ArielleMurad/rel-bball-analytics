@@ -16,8 +16,8 @@ from .fixtures.api_responses import (
     players_non_nba,
 )
 from .fixtures.database import reset_test_db, setup_test_db
-from .fixtures.dataframes import expected_player_matches
 from .fixtures.db_records import player_record, players_valid
+from .fixtures.expected import df_player_matches
 
 
 class TestGetPlayerMatches:
@@ -103,8 +103,8 @@ class TestFilterNbaPlayers:
 class TestCleanPlayerData:
     """test suite for clean_player_data"""
 
-    def test_returns_formatted_player_info(self, players_nba, expected_player_matches):
+    def test_returns_formatted_player_info(self, players_nba, df_player_matches):
         players = pd.DataFrame(players_nba["response"])
         results = clean_player_data(players=players)
 
-        assert results.equals(expected_player_matches)
+        assert results.equals(df_player_matches)
