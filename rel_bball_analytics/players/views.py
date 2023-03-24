@@ -34,19 +34,12 @@ def search():
 
 @players_bp.route("/<id>_<season>", methods=["GET"])
 def details(id, season):
-    from rel_bball_analytics.database import fetch_records
-    from rel_bball_analytics.statistics.models import Statistic
-    from rel_bball_analytics.statistics.summary import get_player_summary_stats
-
-    from .models import Player
+    from .search import get_player_details
     from .styles import format_player_details
 
-    player_data = fetch_records(model=Player, id=id)[0]
+    player_data = get_player_details(id=id, season=season)
 
-    stats_data = fetch_records(model=Statistic, player_id=id, season=season)
-    stats_data = get_player_summary_stats(stats=pd.DataFrame(stats_data))
-
-    player_data = {**player_data, **stats_data}
-    player_data = format_player_details(player_data=player_data)
-
-    return render_template("players/details.html", player_data=player_data)
+    return render_template(
+        "players/details.html",
+        player_data=format_player_details(player_data=player_data),
+    )
