@@ -34,10 +34,13 @@ def search():
 
 @players_bp.route("/<id>_<season>", methods=["GET"])
 def details(id, season):
+    from rel_bball_analytics.games.game_log import get_game_log
+
     from .search import get_player_details
     from .styles import format_player_details
 
     player_data = get_player_details(id=id, season=season)
+    game_log = get_game_log(player_id=id, season=season)
 
     return render_template(
         "players/details.html",
