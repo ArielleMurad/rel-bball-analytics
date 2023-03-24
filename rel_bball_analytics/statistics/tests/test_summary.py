@@ -7,10 +7,10 @@ from rel_bball_analytics.statistics.summary import (
     get_summary_stats,
 )
 
-from .fixtures.dataframes import (
-    expected_clean_stats_data,
-    expected_player_stats,
-    expected_player_summary_stats,
+from .fixtures.expected import (
+    df_player_stats,
+    df_stats_data,
+    player_summary_stats,
 )
 
 
@@ -18,8 +18,8 @@ class TestGetSummaryStats:
     """test suite for get_summary_stats"""
 
     @patch("rel_bball_analytics.statistics.summary.get_player_stats")
-    def test_returns_summary_stats(self, get_player_stats, expected_player_stats):
-        get_player_stats.return_value = expected_player_stats
+    def test_returns_summary_stats(self, get_player_stats, df_player_stats):
+        get_player_stats.return_value = df_player_stats
         results = get_summary_stats(player_ids=[124], season=2022)
 
         assert type(results) == pd.DataFrame
@@ -37,9 +37,7 @@ class TestGetSummaryStats:
 class TestGetPlayerSummaryStats:
     """test suite for get_player_summary_stats"""
 
-    def test_returns_player_summary_stats(
-        self, expected_player_stats, expected_player_summary_stats
-    ):
-        results = get_player_summary_stats(stats=expected_player_stats)
+    def test_returns_player_summary_stats(self, df_player_stats, player_summary_stats):
+        results = get_player_summary_stats(stats=df_player_stats)
 
-        assert results == expected_player_summary_stats
+        assert results == player_summary_stats

@@ -3,11 +3,9 @@ from unittest.mock import patch
 import pandas as pd
 
 from rel_bball_analytics.players.search import get_search_result
-from rel_bball_analytics.statistics.tests.fixtures.dataframes import (
-    expected_player_summary_stats,
-)
+from rel_bball_analytics.statistics.tests.fixtures.expected import player_summary_stats
 
-from .fixtures.dataframes import expected_player_matches
+from .fixtures.expected import df_player_matches
 
 
 class TestGetSearchResult:
@@ -19,11 +17,11 @@ class TestGetSearchResult:
         self,
         get_player_matches,
         get_summary_stats,
-        expected_player_matches,
-        expected_player_summary_stats,
+        df_player_matches,
+        player_summary_stats,
     ):
-        get_player_matches.return_value = expected_player_matches
-        get_summary_stats.return_value = pd.DataFrame([expected_player_summary_stats])
+        get_player_matches.return_value = df_player_matches
+        get_summary_stats.return_value = pd.DataFrame([player_summary_stats])
 
         results = get_search_result(name="Curry", season=2022)
 
@@ -43,9 +41,9 @@ class TestGetSearchResult:
     @patch("rel_bball_analytics.players.search.get_summary_stats")
     @patch("rel_bball_analytics.players.search.get_player_matches")
     def test_returns_none_if_no_stats_available(
-        self, get_player_matches, get_summary_stats, expected_player_matches
+        self, get_player_matches, get_summary_stats, df_player_matches
     ):
-        get_player_matches.return_value = expected_player_matches
+        get_player_matches.return_value = df_player_matches
         get_summary_stats.return_value = pd.DataFrame()
 
         results = get_search_result(name="Wembanyama", season=2022)

@@ -3,7 +3,7 @@ import pytest
 
 
 @pytest.fixture()
-def expected_player_matches():
+def df_player_matches():
     return pd.DataFrame(
         [
             {

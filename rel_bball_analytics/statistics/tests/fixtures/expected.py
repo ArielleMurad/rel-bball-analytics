@@ -3,7 +3,7 @@ import pytest
 
 
 @pytest.fixture()
-def expected_clean_stats_data():
+def df_stats_data():
     return pd.DataFrame(
         [
             {
@@ -61,16 +61,16 @@ def expected_clean_stats_data():
 
 
 @pytest.fixture()
-def expected_player_stats(expected_clean_stats_data):
-    player_stats = expected_clean_stats_data
-    player_stats["player_id"] = 124
-    player_stats["season"] = 2022
+def df_player_stats(df_stats_data):
+    df_player_stats = df_stats_data
+    df_player_stats["player_id"] = 124
+    df_player_stats["season"] = 2022
 
-    return player_stats
+    return df_player_stats
 
 
 @pytest.fixture()
-def expected_player_summary_stats():
+def player_summary_stats():
     return {
         "id": 124,
         "season": 2022,
