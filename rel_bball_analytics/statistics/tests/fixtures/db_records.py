@@ -7,18 +7,18 @@ from rel_bball_analytics.statistics.models import Statistic
 def stats_valid():
     return [
         {
-            "id": "124_10101",
+            "id": "124_1",
             "player_id": 124,
-            "game_id": 10101,
+            "game_id": 1,
             "season": 2022,
             "team_id": 11,
             "team": "GSW",
             "position": "PG",
         },
         {
-            "id": "265_20202",
+            "id": "265_2",
             "player_id": 256,
-            "game_id": 20202,
+            "game_id": 2,
             "season": 2019,
             "team_id": 17,
             "team": "LAL",
@@ -31,9 +31,9 @@ def stats_valid():
 def stats_missing_required_field():
     return [
         {
-            "id": "124_10101",
+            "id": "124_1",
             "player_id": 124,
-            "game_id": 10101,
+            "game_id": 1,
         },
     ]
 
@@ -42,18 +42,18 @@ def stats_missing_required_field():
 def stats_duplicate():
     return [
         {
-            "id": "124_10101",
+            "id": "124_1",
             "player_id": 124,
-            "game_id": 10101,
+            "game_id": 1,
             "season": 2022,
             "team_id": 11,
             "team": "GSW",
             "position": "PG",
         },
         {
-            "id": "124_10101",
+            "id": "124_1",
             "player_id": 124,
-            "game_id": 10101,
+            "game_id": 1,
             "season": 2022,
             "team_id": 11,
             "team": "GSW",
@@ -65,9 +65,9 @@ def stats_duplicate():
 @pytest.fixture()
 def stats_record():
     return Statistic(
-        id="124_10101",
+        id="124_1",
         player_id=124,
-        game_id=10101,
+        game_id=1,
         season=2022,
         team_id=11,
         team="GSW",

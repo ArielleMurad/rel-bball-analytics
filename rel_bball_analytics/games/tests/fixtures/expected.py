@@ -5,7 +5,7 @@ import pytest
 
 
 @pytest.fixture()
-def expected_clean_game_data():
+def df_game_data():
     return pd.DataFrame(
         [
             {

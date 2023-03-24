@@ -1,13 +1,13 @@
 from rel_bball_analytics.database import db, delete_records, fetch_records, save_records
 from rel_bball_analytics.statistics.models import Statistic
 
+from .fixtures.database import reset_test_db, setup_test_db
 from .fixtures.db_records import (
     stats_duplicate,
     stats_missing_required_field,
     stats_record,
     stats_valid,
 )
-from .fixtures.database import reset_test_db, setup_test_db
 
 
 class TestSaveStatisticRecords:
@@ -40,7 +40,7 @@ class TestFetchStatisticRecords:
         records = fetch_records(model=Statistic, player_id=124, season=2022)
 
         assert len(records) > 0
-        assert records[0]["id"] == "124_10101"
+        assert records[0]["id"] == "124_1"
         assert records[0]["team"] == "GSW"
         assert records[0]["position"] == "PG"
         assert records[0]["points"] == 25

@@ -2,7 +2,6 @@ from unittest.mock import patch
 
 import pandas as pd
 
-from rel_bball_analytics.database import db
 from rel_bball_analytics.games.data_source import (
     clean_game_data,
     fetch_game_data,
@@ -16,7 +15,7 @@ from .fixtures.api_responses import (
     games_unfinished,
 )
 from .fixtures.database import reset_test_db, setup_test_db
-from .fixtures.dataframes import expected_clean_game_data
+from .fixtures.expected import df_game_data
 
 
 class TestGetGameStats:
@@ -24,9 +23,9 @@ class TestGetGameStats:
 
     @patch("rel_bball_analytics.games.data_source.fetch_game_data")
     def test_returns_dataframe_with_stats_data(
-        self, fetch_game_data, reset_test_db, expected_clean_game_data
+        self, fetch_game_data, reset_test_db, df_game_data
     ):
-        fetch_game_data.return_value = expected_clean_game_data
+        fetch_game_data.return_value = df_game_data
         result = get_game_stats(team_id=11, team="GSW", season=2022)
 
         assert type(result) == pd.DataFrame
@@ -94,10 +93,8 @@ class TestFilterFinishedGames:
 class TestCleanGameData:
     """test suite for clean_game_data"""
 
-    def test_returns_formatted_game_data(
-        self, games_finished, expected_clean_game_data
-    ):
+    def test_returns_formatted_game_data(self, games_finished, df_game_data):
         games = pd.DataFrame(games_finished["response"])
         results = clean_game_data(games=games)
 
-        assert results.equals(expected_clean_game_data)
+        assert results.equals(df_game_data)
