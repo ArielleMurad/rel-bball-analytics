@@ -9,13 +9,13 @@ from rel_bball_analytics.players.data_source import (
     filter_nba_players,
     get_player_matches,
 )
+from rel_bball_analytics.tests.fixtures.database import reset_test_db, setup_test_db
 
 from .fixtures.api_responses import (
     empty_response,
     players_nba,
     players_non_nba,
 )
-from .fixtures.database import reset_test_db, setup_test_db
 from .fixtures.db_records import player_record, players_valid
 from .fixtures.expected import df_player_matches
 

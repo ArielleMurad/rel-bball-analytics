@@ -8,13 +8,13 @@ from rel_bball_analytics.games.data_source import (
     filter_finished_games,
     get_game_stats,
 )
+from rel_bball_analytics.tests.fixtures.database import reset_test_db, setup_test_db
 
 from .fixtures.api_responses import (
     empty_response,
     games_finished,
     games_unfinished,
 )
-from .fixtures.database import reset_test_db, setup_test_db
 from .fixtures.expected import df_game_data
 
 

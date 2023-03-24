@@ -8,8 +8,8 @@ from rel_bball_analytics.players.search import (
     get_search_result,
 )
 from rel_bball_analytics.statistics.tests.fixtures.expected import player_summary_stats
+from rel_bball_analytics.tests.fixtures.database import reset_test_db, setup_test_db
 
-from .fixtures.database import reset_test_db, setup_test_db
 from .fixtures.db_records import player_record
 from .fixtures.expected import df_player_matches
 

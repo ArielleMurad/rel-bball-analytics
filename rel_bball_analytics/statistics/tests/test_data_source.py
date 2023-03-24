@@ -7,9 +7,9 @@ from rel_bball_analytics.statistics.data_source import (
     fetch_stats_data,
     get_player_stats,
 )
+from rel_bball_analytics.tests.fixtures.database import reset_test_db, setup_test_db
 
 from .fixtures.api_responses import empty_response, stats_full, stats_missing
-from .fixtures.database import reset_test_db, setup_test_db
 from .fixtures.expected import df_stats_data
 
 

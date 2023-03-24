@@ -3,8 +3,8 @@ from unittest.mock import patch
 from rel_bball_analytics.database import db
 from rel_bball_analytics.games.game_log import get_game_log
 from rel_bball_analytics.statistics.tests.fixtures.db_records import stats_record
+from rel_bball_analytics.tests.fixtures.database import reset_test_db, setup_test_db
 
-from .fixtures.database import reset_test_db, setup_test_db
 from .fixtures.expected import df_game_data
 
 

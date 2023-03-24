@@ -1,7 +1,7 @@
 from rel_bball_analytics.database import db, delete_records, fetch_records, save_records
 from rel_bball_analytics.statistics.models import Statistic
+from rel_bball_analytics.tests.fixtures.database import reset_test_db, setup_test_db
 
-from .fixtures.database import reset_test_db, setup_test_db
 from .fixtures.db_records import (
     stats_duplicate,
     stats_missing_required_field,
