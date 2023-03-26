@@ -16,16 +16,15 @@ def search():
         search_result = get_search_result(name=name, season=season)
 
         if search_result is None:
-            message = '<p class="message">Sorry, no data available for this search!</p>'
-            return render_template(
-                "players/search_result.html",
-                search_result=message,
-                season=format_season(season),
+            search_result = (
+                '<p class="message">Sorry, no data available for this search!</p>'
             )
+        else:
+            search_result = format_search_result(search_result=search_result)
 
         return render_template(
             "players/search_result.html",
-            search_result=format_search_result(search_result=search_result),
+            search_result=search_result,
             season=format_season(season),
         )
 
@@ -34,19 +33,21 @@ def search():
 
 @players_bp.route("/<id>_<season>", methods=["GET"])
 def details(id, season):
-    from rel_bball_analytics.database import fetch_records
-    from rel_bball_analytics.statistics.models import Statistic
-    from rel_bball_analytics.statistics.summary import get_player_summary_stats
+    from rel_bball_analytics.games.game_log import get_game_log
 
-    from .models import Player
+    from .search import get_player_details
     from .styles import format_player_details
 
-    player_data = fetch_records(model=Player, id=id)[0]
+    player_data = get_player_details(id=id, season=season)
+    game_log = get_game_log(player_id=id, season=season)
 
-    stats_data = fetch_records(model=Statistic, player_id=id, season=season)
-    stats_data = get_player_summary_stats(stats=pd.DataFrame(stats_data))
+    if game_log is None:
+        game_log = (
+            '<p class="message">Sorry, no game data available for this season!</p>'
+        )
 
-    player_data = {**player_data, **stats_data}
-    player_data = format_player_details(player_data=player_data)
-
-    return render_template("players/details.html", player_data=player_data)
+    return render_template(
+        "players/details.html",
+        player_data=format_player_details(player_data=player_data),
+        game_log=game_log,
+    )

@@ -2,9 +2,15 @@ import logging
 
 import pandas as pd
 
-from rel_bball_analytics.statistics.summary import get_summary_stats
+from rel_bball_analytics.database import fetch_records
+from rel_bball_analytics.statistics.models import Statistic
+from rel_bball_analytics.statistics.summary import (
+    get_player_summary_stats,
+    get_summary_stats,
+)
 
 from .data_source import get_player_matches
+from .models import Player
 
 logger = logging.getLogger(__name__)
 
@@ -28,3 +34,13 @@ def get_search_result(name: str, season: int):
     logger.info(f"{len(results)} results found for '{name}' in the {season} season")
 
     return results
+
+
+def get_player_details(id: int, season: int):
+    """Return player details including summary stats for given player in season"""
+    player = fetch_records(model=Player, id=id)[0]
+
+    stats = fetch_records(model=Statistic, player_id=id, season=season)
+    summary_stats = get_player_summary_stats(stats=pd.DataFrame(stats))
+
+    return {**player, **summary_stats}

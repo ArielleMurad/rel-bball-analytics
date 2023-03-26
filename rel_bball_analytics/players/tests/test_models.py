@@ -1,5 +1,6 @@
 from rel_bball_analytics.database import db, fetch_records, save_records
 from rel_bball_analytics.players.models import Player
+from rel_bball_analytics.tests.fixtures.database import reset_test_db, setup_test_db
 
 from .fixtures.db_records import (
     player_record,
@@ -7,7 +8,6 @@ from .fixtures.db_records import (
     players_missing_required_field,
     players_valid,
 )
-from .fixtures.database import reset_test_db, setup_test_db
 
 
 class TestSavePlayerRecords:

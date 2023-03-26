@@ -4,33 +4,7 @@ from rel_bball_analytics.api import get_data_from_api
 from rel_bball_analytics.database import delete_records, save_records
 
 from .models import Statistic
-from .utils import time_to_int
-
-STATS_COLUMNS = {
-    "game_id": "game_id",
-    "team_id": "team_id",
-    "team_code": "team",
-    "pos": "position",
-    "points": "points",
-    "min": "minutes_played",
-    "fgm": "field_goals_made",
-    "fga": "field_goal_attempts",
-    "fgp": "field_goal_percentage",
-    "tpm": "three_points_made",
-    "tpa": "three_point_attempts",
-    "tpp": "three_point_percentage",
-    "ftm": "free_throws_made",
-    "fta": "free_throw_attempts",
-    "ftp": "free_throw_percentage",
-    "offReb": "offensive_rebounds",
-    "defReb": "defensive_rebounds",
-    "totReb": "total_rebounds",
-    "assists": "assists",
-    "steals": "steals",
-    "blocks": "blocks",
-    "turnovers": "turnovers",
-    "pFouls": "personal_fouls",
-}
+from .utils import STATS_COLUMNS, time_to_int
 
 
 def get_player_stats(player_id: int, season: int):

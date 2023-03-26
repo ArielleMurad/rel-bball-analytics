@@ -2,9 +2,15 @@ from unittest.mock import patch
 
 import pandas as pd
 
-from rel_bball_analytics.players.search import get_search_result
+from rel_bball_analytics.database import db
+from rel_bball_analytics.players.search import (
+    get_player_details,
+    get_search_result,
+)
 from rel_bball_analytics.statistics.tests.fixtures.expected import player_summary_stats
+from rel_bball_analytics.tests.fixtures.database import reset_test_db, setup_test_db
 
+from .fixtures.db_records import player_record
 from .fixtures.expected import df_player_matches
 
 
@@ -48,3 +54,27 @@ class TestGetSearchResult:
 
         results = get_search_result(name="Wembanyama", season=2022)
         assert results is None
+
+
+class TestGetPlayerDetails:
+    """test suite for get_player_details"""
+
+    @patch("rel_bball_analytics.players.search.get_player_summary_stats")
+    def test_returns_player_details(
+        self,
+        get_player_summary_stats,
+        reset_test_db,
+        player_record,
+        player_summary_stats,
+    ):
+        db.session.add(player_record)
+        get_player_summary_stats.return_value = player_summary_stats
+
+        results = get_player_details(id=124, season=2022)
+
+        assert results["season"] == 2022
+        assert results["firstname"] == "Stephen"
+        assert results["lastname"] == "Curry"
+        assert results["team"] == ["GSW"]
+        assert results["games_played"] == 2
+        assert results["points"] == 25
