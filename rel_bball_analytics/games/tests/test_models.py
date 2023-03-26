@@ -13,7 +13,7 @@ from .fixtures.db_records import (
 class TestSaveGameRecords:
     """test suite for save_records"""
 
-    def test_saves_stats_data_to_db(self, reset_test_db, games_valid):
+    def test_saves_game_data_to_db(self, reset_test_db, games_valid):
         save_records(model=Game, items=games_valid)
         records = db.session.query(Game).all()
 

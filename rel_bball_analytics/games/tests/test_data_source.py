@@ -82,7 +82,7 @@ class TestFilterFinishedGames:
         assert type(results) == pd.DataFrame
         assert len(results) > 0
 
-    def test_returns_empty_df_if_no_nba_players(self, games_unfinished):
+    def test_returns_empty_df_if_no_finished_games(self, games_unfinished):
         games = pd.DataFrame(games_unfinished["response"])
         results = filter_finished_games(games=games)
 
