@@ -1,7 +1,6 @@
 TEXT_PRIMARY = "black"
-TEXT_SECONDARY = "#dc6300"
 
-BG_LIGHT = "hsl(30deg 100% 62% / 44%)"
+BG_LIGHT = "#D3D3D3"
 
 BORDER_PRIMARY = "2px solid black"
 

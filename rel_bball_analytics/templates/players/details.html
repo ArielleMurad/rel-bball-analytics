@@ -6,7 +6,7 @@
 
 {% block content %}
 <h1 class="mt-4">{{ player_data.firstname }} {{ player_data.lastname }}</h1>
-<div class="container mt-2">
+<div class="mt-2">
     <div class="column-30 mb-4">
         <p class="mb-2"><b>Birthdate: </b>{{ player_data.birth_date }}</p>
         <p class="mb-2"><b>Country: </b>{{ player_data.country }}</p>
@@ -30,7 +30,7 @@
 </div>
 
 <h2 class="mt-4">Per-Game Statistics ({{ player_data.season }}) </h2>
-<div class="container mt-2">
+<div class="mt-2">
     <table class="season-stats">
         <tr>
           <th>G</th>
@@ -78,4 +78,7 @@
         </tr>
     </table>
 </div>
+
+<h2 class="mt-4">Game Log ({{ player_data.season }}) </h2>
+{{ game_log|safe }}
 {% endblock %}

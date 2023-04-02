@@ -1,27 +1,29 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1 class="mt-4 mb-2">NBA Player Search</h1>
+<div class="container">
+    <h1 class="mt-4 mb-2">NBA Player Search</h1>
 
-<form class="form-inline" method="post">
-    <div class="form-group">
-        <input type="text" name="name" placeholder="Last Name" class="form-control mr-4" required></input>
-        <select name="season" id="season" class="form-control mr-4" required>
-            <option value="" selected disabled>Season</option>
-            <option value="2022">2022-23</option>
-            <option value="2021">2021-22</option>
-            <option value="2020">2020-21</option>
-            <option value="2019">2019-20</option>
-            <option value="2018">2018-19</option>
-            <option value="2017">2017-18</option>
-            <option value="2016">2016-17</option>
-            <option value="2015">2015-16</option>
-          </select>
-        <button type="submit" class="btn btn-primary">Search</button>
+    <form class="form-inline" method="post">
+        <div class="form-group">
+            <input type="text" name="name" placeholder="Last Name" class="form-control mr-4" required></input>
+            <select name="season" id="season" class="form-control mr-4" required>
+                <option value="" selected disabled>Season</option>
+                <option value="2022">2022-23</option>
+                <option value="2021">2021-22</option>
+                <option value="2020">2020-21</option>
+                <option value="2019">2019-20</option>
+                <option value="2018">2018-19</option>
+                <option value="2017">2017-18</option>
+                <option value="2016">2016-17</option>
+                <option value="2015">2015-16</option>
+            </select>
+            <button type="submit" class="btn btn-primary">Search</button>
+        </div>
+    </form>
+
+    <div class="mt-4">
+        {% block players %} {% endblock %}
     </div>
-</form>
-
-<div class="container mt-4">
-    {% block players %} {% endblock %}
 </div>
 {% endblock %}
