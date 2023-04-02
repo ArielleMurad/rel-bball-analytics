@@ -3,22 +3,7 @@ from flask import url_for
 
 import rel_bball_analytics.static.py.players as styles
 
-TABLE_COLUMNS = {
-    "firstname": "First Name",
-    "lastname": "Last Name",
-    "age": "Age",
-    "team": "Team",
-    "position": "Position",
-    "games_played": "GP",
-    "points": "PPG",
-    "field_goal_percentage": "FG%",
-    "three_point_percentage": "FG3%",
-    "free_throw_percentage": "FT%",
-    "total_rebounds": "TRB",
-    "assists": "AST",
-    "is_active": "Is Active?",
-    "link": "",
-}
+from .utils import TABLE_COLUMNS
 
 
 def format_search_result(search_result: pd.DataFrame):
