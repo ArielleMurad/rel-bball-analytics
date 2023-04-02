@@ -29,6 +29,14 @@ def game_log_table():
             ],
         },
         {
+            "selector": "th",
+            "props": [
+                ("position", "sticky"),
+                ("top", "56px"),
+                ("background-color", "white"),
+            ],
+        },
+        {
             "selector": "thead th",
             "props": [
                 ("font-weight", "bold"),
