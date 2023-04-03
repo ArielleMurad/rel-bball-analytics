@@ -12,5 +12,4 @@ Poetry is used to manage package dependencies. You can learn more about poetry [
 5. Run the flask application: `poetry run flask run`
 
 ## Demo
-https://user-images.githubusercontent.com/43834783/224589818-6aaf68c5-6b43-4cec-8882-d0e83a064802.mov
-
+https://user-images.githubusercontent.com/43834783/229386518-664f2b66-792b-4929-89d6-dba8d4d8d435.mov
